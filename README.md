@@ -1,4 +1,4 @@
-# Microserviço de Autenticação com NodeJS e TypeScript (Exemplo básico)
+# Microsserviço de Autenticação com NodeJS e TypeScript (Exemplo básico)
 
 Esse repositório contém um implementação básica, meramente para estudo e prática, de uma sistema de autenticação com NodeJS.
 
