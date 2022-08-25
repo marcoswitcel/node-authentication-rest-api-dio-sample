@@ -37,3 +37,6 @@ npm install --save-dev ts-node-dev
 
 * Link do curso na DIO: [https://web.dio.me/course/aplicando-o-estilo-arquitetural-rest-com-nodejs/learning/1faf1482-06fa-4552-aa29-d0fc5c594929](https://web.dio.me/course/aplicando-o-estilo-arquitetural-rest-com-nodejs/learning/1faf1482-06fa-4552-aa29-d0fc5c594929)
 * Link do repositório referência disponibilizado pelo instrutor: [https://github.com/RenanJPaula/dio-node-user-authentication-api](https://github.com/RenanJPaula/dio-node-user-authentication-api)
+* Página do Docker que explica um pouco sobre o comando `docker compose up` e os arquivos `docker-compose.yml`: [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
+* Página da imagem oficial do [PostgreSQL](https://www.postgresql.org/) no Docker Hub: [https://hub.docker.com/_/postgres](https://hub.docker.com/_/postgres)
+* Um tutorial de referência que consultei para validar e entender melhor o setup com PostgreSQL: [https://geshan.com.np/blog/2021/12/docker-postgres/](https://geshan.com.np/blog/2021/12/docker-postgres/)
