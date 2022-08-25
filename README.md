@@ -35,5 +35,5 @@ npm install --save-dev ts-node-dev
 
 ## Referências
 
-* Link do curso na DIO: [https://web.dio.me/track/spring-framework-experience](https://web.dio.me/track/spring-framework-experience)
+* Link do curso na DIO: [https://web.dio.me/course/aplicando-o-estilo-arquitetural-rest-com-nodejs/learning/1faf1482-06fa-4552-aa29-d0fc5c594929](https://web.dio.me/course/aplicando-o-estilo-arquitetural-rest-com-nodejs/learning/1faf1482-06fa-4552-aa29-d0fc5c594929)
 * Link do repositório referência disponibilizado pelo instrutor: [https://github.com/RenanJPaula/dio-node-user-authentication-api](https://github.com/RenanJPaula/dio-node-user-authentication-api)
