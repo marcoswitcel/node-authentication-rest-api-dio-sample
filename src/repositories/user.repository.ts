@@ -37,4 +37,25 @@ export default class UserRepository {
             throw new QueryError(message, error);
         }
     }
+
+    /**
+     * Método que faz a criação de um novo usuário na base de dados
+     * @param user username e password que serão usados para a criação do usuário
+     * @returns retorna o uuid do usuário criado ou um instância de `QueryErro`
+     * caso ocorre algum erro na inserção.
+     */
+    public async create(user: Required<Pick<IUser,'username'|'password'>>): Promise<string|QueryError> {
+        try {
+            const query = `
+                INSERT INTO users (username, password)
+                    VALUES ($1, crypt($2, $3))
+                    RETURNING uuid
+            `;
+            const result = await this.pool.query<{ uuid: string }>(query, [user.username, user.password, 'meu_segredo']);
+            return result.rows[0].uuid;
+        } catch (error) {
+            const message = error instanceof Error ? error.message : 'Erro ao realizar o criação do registro';
+            return new QueryError(message, error);
+        }
+    }
 }

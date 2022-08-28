@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { QueryError } from '../errors/query.error';
+import { IUser } from '../models/user.model';
 import { userRepository } from '../repositories';
 
 const usersRoute = Router();
@@ -26,10 +27,27 @@ usersRoute.get('/users/:uuid', async (req: Request<{ uuid: string }>, res: Respo
     }
 });
 
-usersRoute.post('/users', (req: Request, res: Response, next: NextFunction) => {
-    // @TODO pendente desenvolvimento
+usersRoute.post('/users', async (req: Request<{}, {}, Required<Pick<IUser,'username'|'password'>>>, res: Response, next: NextFunction) => {
+    if (typeof req.body.username !== 'string' || typeof req.body.password !== 'string') {
+        res.status(StatusCodes.UNPROCESSABLE_ENTITY).send({ message: 'Campos obrigatórios faltando' });
+        return;
+    }
+    /**
+     * @TODO João, falta uma camada de validação aqui, a validação acima atende algumas necessidades,
+     * porém o código de validação deveria ser escrito de uma forma mais sustentável. Talvez usar
+     * uma biblioteca para simplificar os trechos de validação?
+     * @TODO João, outra coisa importanten, falta alterar o esquema para não aceitar nomes duplicados
+     * e adicioanr essa verificação aqui antes de tentar inserir.
+     */
     const newUser = req.body;
-    res.status(StatusCodes.CREATED).send(newUser);
+    const result = await userRepository.create(newUser);
+
+    if (result instanceof QueryError) {
+        next(result);
+        return;
+    }
+
+    res.status(StatusCodes.CREATED).send({ uuid: result });
 });
 
 usersRoute.put('/users/:uuid', (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
