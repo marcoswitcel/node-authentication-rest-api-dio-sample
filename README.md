@@ -42,3 +42,4 @@ npm install --save-dev ts-node-dev
 * Página do Docker que explica um pouco sobre o comando `docker compose up` e os arquivos `docker-compose.yml`: [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
 * Página da imagem oficial do [PostgreSQL](https://www.postgresql.org/) no Docker Hub: [https://hub.docker.com/_/postgres](https://hub.docker.com/_/postgres)
 * Um tutorial de referência que consultei para validar e entender melhor o setup com PostgreSQL: [https://geshan.com.np/blog/2021/12/docker-postgres/](https://geshan.com.np/blog/2021/12/docker-postgres/)
+* Tipos utilitários do Typescript: [https://www.typescriptlang.org/docs/handbook/utility-types.html](https://www.typescriptlang.org/docs/handbook/utility-types.html)
