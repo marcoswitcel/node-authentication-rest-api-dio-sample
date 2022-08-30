@@ -71,8 +71,15 @@ usersRoute.put('/users/:uuid', async (req: Request<{ uuid: string }>, res: Respo
     res.status(StatusCodes.OK).send({ uuid: result });
 });
 
-usersRoute.delete('/users/:uuid', (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
-    // @TODO pendente desenvolvimento
+usersRoute.delete('/users/:uuid', async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
+    const uuid = req.params.uuid;
+    const result = await userRepository.delete(uuid);
+
+    if (result instanceof QueryError) {
+        next(result);
+        return;
+    }
+
     res.sendStatus(StatusCodes.OK);
 });
 

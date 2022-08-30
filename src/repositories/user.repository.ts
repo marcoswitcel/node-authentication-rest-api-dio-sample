@@ -82,4 +82,21 @@ export default class UserRepository {
         }
     }
 
+    /**
+     * Método que deleta um registro pelo uuid
+     * @param uuid uuid do usuário a ser deletado
+     * @returns retorna o uuid do usuário deleteado ou um instância de `QueryErro`
+     * caso ocorre algum erro na deleção
+     */
+    public async delete(uuid: string): Promise<string|QueryError> {
+        try {
+            const query = 'DELETE FROM users WHERE uuid = $1';
+            await this.pool.query(query, [uuid]);
+            return uuid;
+        } catch (error) {
+            const message = error instanceof Error ? error.message : 'Erro ao realizar a deleção do registro';
+            return new QueryError(message, error);
+        }
+    }
+
 }
