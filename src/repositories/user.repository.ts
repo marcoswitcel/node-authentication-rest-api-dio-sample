@@ -58,4 +58,28 @@ export default class UserRepository {
             return new QueryError(message, error);
         }
     }
+
+    /**
+     * Método que atualiza os dados de um registro
+     * @param user Informações do usuário que serão atualizadas
+     * @returns retorna o uuid do usuário que foi atualizado ou uma instância
+     * de `QueryError` caso algo dê errado com o update
+     */
+    public async update(user: Required<IUser>): Promise<string|QueryError> {
+        try {
+            const query = `
+                UPDATE users
+                SET
+                    username = $1,
+                    password = crypt($2, $3)
+                WHERE uuid = $4
+            `;
+            const result = await this.pool.query(query, [ user.username, user.password, 'meu_segredo', user.uuid]);
+            return user.uuid;
+        } catch (error){
+            const message = error instanceof Error ? error.message : 'Erro ao realizar a atualização do registro';
+            return new QueryError(message, error);
+        }
+    }
+
 }

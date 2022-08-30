@@ -50,11 +50,25 @@ usersRoute.post('/users', async (req: Request<{}, {}, Required<Pick<IUser,'usern
     res.status(StatusCodes.CREATED).send({ uuid: result });
 });
 
-usersRoute.put('/users/:uuid', (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
-    // @TODO pendente desenvolvimento
-    const uuid = req.params.uuid;
-    const user = req.body;
-    res.status(StatusCodes.OK).send({ ...user, uuid });
+usersRoute.put('/users/:uuid', async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
+    if (typeof req.body.username !== 'string' || typeof req.body.password !== 'string') {
+        res.status(StatusCodes.UNPROCESSABLE_ENTITY).send({ message: 'Campos obrigatórios faltando' });
+        return;
+    }
+
+    const user: Required<IUser> = {
+        ...req.body ,
+        uuid: req.params.uuid
+    };
+
+    const result = await userRepository.update(user);
+
+    if (result instanceof QueryError) {
+        next(result);
+        return;
+    }
+
+    res.status(StatusCodes.OK).send({ uuid: result });
 });
 
 usersRoute.delete('/users/:uuid', (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
