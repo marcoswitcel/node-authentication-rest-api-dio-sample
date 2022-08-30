@@ -54,7 +54,7 @@ export default class UserRepository {
             const result = await this.pool.query<{ uuid: string }>(query, [user.username, user.password, 'meu_segredo']);
             return result.rows[0].uuid;
         } catch (error) {
-            const message = error instanceof Error ? error.message : 'Erro ao realizar o criação do registro';
+            const message = error instanceof Error ? error.message : 'Erro ao realizar a criação do registro';
             return new QueryError(message, error);
         }
     }
