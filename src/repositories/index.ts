@@ -1,5 +1,5 @@
-import databaseConnection from "../data-source/database-connection";
-import UserRepository from "./user.repository";
+import databaseConnection from '../data-source/database-connection';
+import UserRepository from './user.repository';
 
 /**
  * Instância do repositório configurada com o conexão que deve ser usada
