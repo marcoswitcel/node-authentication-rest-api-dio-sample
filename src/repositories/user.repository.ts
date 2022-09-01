@@ -99,4 +99,6 @@ export default class UserRepository {
         }
     }
 
+    // @TODO João, implementar o método que busca o usuário pelo username e password
+
 }
