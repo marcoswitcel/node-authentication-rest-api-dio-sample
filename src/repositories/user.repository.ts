@@ -2,6 +2,13 @@ import { Pool } from 'pg';
 import { QueryError } from '../errors/query.error';
 import { IUser } from '../models/user.model';
 
+/**
+ * @TODO João, remover o salt do código font, implementar uma maneira pela qual
+ * a configuração possa ser feita externamente. Exemplo: através de um arquivo
+ * `.env` ou técnicas similares. Ainda Sobre o salt, declará-lo como uma
+ * dependência do `UserRepository`. 
+ */
+
 export default class UserRepository {
     
     private readonly pool: Pool;
