@@ -99,6 +99,24 @@ export default class UserRepository {
         }
     }
 
-    // @TODO João, implementar o método que busca o usuário pelo username e password
+    /**
+     * Método que busca um registro para o usuário e senha providos, é usado
+     * para validar credenciais
+     * @param username username buscado
+     * @param password password informado
+     */
+    public async findByUsernameAndPassword(username: string, password: string): Promise<IUser|null|QueryError> {
+        try {
+            const query = `
+                SELECT uuid, username FROM users
+                    WHERE username = $1 AND password = crypt($2, $3)
+            `;
+            const { rows } = await this.pool.query<IUser>(query, [username, password, 'meu_segredo']);
+            return rows[0] || null;
+        } catch (error) {
+            const message = error instanceof Error ? error.message : 'Erro ao realizar a busca do registro';
+            return new QueryError(message, error);
+        }
+    }
 
 }
