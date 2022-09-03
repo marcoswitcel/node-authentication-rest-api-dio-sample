@@ -1,7 +1,7 @@
 {
   "name": "ms-authentication",
   "version": "1.0.0",
-  "description": "Microsserviço de autentitcação - Curso DIO",
+  "description": "Microsserviço de autentitcação de usuários - Baseado em um curso da DIO",
   "main": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
