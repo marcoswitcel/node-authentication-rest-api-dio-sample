@@ -49,3 +49,4 @@ npm install --save-dev ts-node-dev
 * Um tutorial de referência que consultei para validar e entender melhor o setup com PostgreSQL: [https://geshan.com.np/blog/2021/12/docker-postgres/](https://geshan.com.np/blog/2021/12/docker-postgres/)
 * Tipos utilitários do Typescript: [https://www.typescriptlang.org/docs/handbook/utility-types.html](https://www.typescriptlang.org/docs/handbook/utility-types.html)
 * Explicação sobre Basic Authentication: [https://swagger.io/docs/specification/2-0/authentication/basic-authentication/#:~:text=Basic%20authentication%20is%20a%20very,%2Dencoded%20username%3Apassword%20string.](https://swagger.io/docs/specification/2-0/authentication/basic-authentication/#:~:text=Basic%20authentication%20is%20a%20very,%2Dencoded%20username%3Apassword%20string.)
+* Página do NPM do pacote `tsconfig-paths` para mais explicações: [https://www.npmjs.com/package/tsconfig-paths](https://www.npmjs.com/package/tsconfig-paths)
