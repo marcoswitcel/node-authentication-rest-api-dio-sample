@@ -1,6 +1,7 @@
+import config from 'config';
 import { Pool } from 'pg';
 
-const connectionString = 'postgres://postgres:postgres@localhost:5432/postgres';
+const connectionString = config.get<string>('database.connectionString');
 
 const databaseConnection = new Pool({ connectionString });
 
