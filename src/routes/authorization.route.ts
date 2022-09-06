@@ -1,3 +1,4 @@
+import config from 'config';
 import { NextFunction, Request, Response, Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import JWT from 'jsonwebtoken';
@@ -5,6 +6,7 @@ import UnauthorizedError from '../errors/unauthorized.error';
 import basicAuthenticationMiddleware from '../middlewares/basic-authentication.middleware';
 
 const authorizationRoute = Router();
+const secretKey = config.get<string>('authentication.secretKey');
 
 authorizationRoute.post('/token', basicAuthenticationMiddleware, async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -16,7 +18,6 @@ authorizationRoute.post('/token', basicAuthenticationMiddleware, async (req: Req
 
         const payload = { username: user.username };
         const options = { subject: user.uuid };
-        const secretKey = 'minha_chave_secreta';
         const jwtToken = JWT.sign(payload, secretKey, options);
 
         res.status(StatusCodes.OK).json({ token: jwtToken })
