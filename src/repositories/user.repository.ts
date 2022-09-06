@@ -2,19 +2,15 @@ import { Pool } from 'pg';
 import { QueryError } from '../errors/query.error';
 import { IUser } from '../models/user.model';
 
-/**
- * @TODO João, remover o salt do código font, implementar uma maneira pela qual
- * a configuração possa ser feita externamente. Exemplo: através de um arquivo
- * `.env` ou técnicas similares. Ainda Sobre o salt, declará-lo como uma
- * dependência do `UserRepository`. 
- */
 
 export default class UserRepository {
     
     private readonly pool: Pool;
+    private readonly cryptKey: string;
 
-    constructor(pool: Pool) {
+    constructor(pool: Pool, cryptKey: string) {
         this.pool = pool;
+        this.cryptKey = cryptKey;
     }
 
     /**
@@ -58,7 +54,7 @@ export default class UserRepository {
                     VALUES ($1, crypt($2, $3))
                     RETURNING uuid
             `;
-            const result = await this.pool.query<{ uuid: string }>(query, [user.username, user.password, 'meu_segredo']);
+            const result = await this.pool.query<{ uuid: string }>(query, [user.username, user.password, this.cryptKey]);
             return result.rows[0].uuid;
         } catch (error) {
             const message = error instanceof Error ? error.message : 'Erro ao realizar a criação do registro';
@@ -81,7 +77,7 @@ export default class UserRepository {
                     password = crypt($2, $3)
                 WHERE uuid = $4
             `;
-            const result = await this.pool.query(query, [ user.username, user.password, 'meu_segredo', user.uuid]);
+            const result = await this.pool.query(query, [ user.username, user.password, this.cryptKey, user.uuid]);
             return user.uuid;
         } catch (error){
             const message = error instanceof Error ? error.message : 'Erro ao realizar a atualização do registro';
@@ -118,7 +114,7 @@ export default class UserRepository {
                 SELECT uuid, username FROM users
                     WHERE username = $1 AND password = crypt($2, $3)
             `;
-            const { rows } = await this.pool.query<IUser>(query, [username, password, 'meu_segredo']);
+            const { rows } = await this.pool.query<IUser>(query, [username, password, this.cryptKey]);
             return rows[0] || null;
         } catch (error) {
             const message = error instanceof Error ? error.message : 'Erro ao realizar a busca do registro';
