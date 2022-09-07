@@ -24,12 +24,15 @@ const server = app.listen(3000, () => {
     console.log('Aplicação executando na porta: ' + 3000);
 });
 
-// Operações executadas no encerramento do programa
-process.on('SIGTERM', () => {
+const onAppClose = () => {
     databaseConnection.end(() => {
-        console.log('Conexão com a base de dados encerrada!');
+        console.log('-- Conexão com a base de dados encerrada!');
     });
     server.close(() => {
-        console.log('Aplicação encerrada');
+        console.log('-- Aplicação executando na porta: ' + 3000 + ', encerrada!');
     });
-});
+};
+
+// Operações executadas no encerramento do programa
+process.on('SIGTERM', onAppClose);
+process.on('SIGINT', onAppClose);
