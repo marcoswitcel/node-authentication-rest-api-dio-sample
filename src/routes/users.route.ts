@@ -6,12 +6,12 @@ import { userRepository } from '../repositories';
 
 const usersRoute = Router();
 
-usersRoute.get('/users', async (req: Request, res: Response, next: NextFunction) => {
+usersRoute.get('/', async (req: Request, res: Response, next: NextFunction) => {
     const users = await userRepository.findAll();
     res.status(StatusCodes.OK).send(users);
 });
 
-usersRoute.get('/users/:uuid', async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
+usersRoute.get('/:uuid', async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
     const { uuid } = req.params;
     try {
         const user = await userRepository.findById(uuid);
@@ -27,7 +27,7 @@ usersRoute.get('/users/:uuid', async (req: Request<{ uuid: string }>, res: Respo
     }
 });
 
-usersRoute.post('/users', async (req: Request<{}, {}, Required<Pick<IUser,'username'|'password'>>>, res: Response, next: NextFunction) => {
+usersRoute.post('/', async (req: Request<{}, {}, Required<Pick<IUser,'username'|'password'>>>, res: Response, next: NextFunction) => {
     if (typeof req.body.username !== 'string' || typeof req.body.password !== 'string') {
         res.status(StatusCodes.UNPROCESSABLE_ENTITY).send({ message: 'Campos obrigatórios faltando' });
         return;
@@ -50,7 +50,7 @@ usersRoute.post('/users', async (req: Request<{}, {}, Required<Pick<IUser,'usern
     res.status(StatusCodes.CREATED).send({ uuid: result });
 });
 
-usersRoute.put('/users/:uuid', async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
+usersRoute.put('/:uuid', async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
     if (typeof req.body.username !== 'string' || typeof req.body.password !== 'string') {
         res.status(StatusCodes.UNPROCESSABLE_ENTITY).send({ message: 'Campos obrigatórios faltando' });
         return;
@@ -71,7 +71,7 @@ usersRoute.put('/users/:uuid', async (req: Request<{ uuid: string }>, res: Respo
     res.status(StatusCodes.OK).send({ uuid: result });
 });
 
-usersRoute.delete('/users/:uuid', async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
+usersRoute.delete('/:uuid', async (req: Request<{ uuid: string }>, res: Response, next: NextFunction) => {
     const uuid = req.params.uuid;
     const result = await userRepository.delete(uuid);
 

@@ -1,6 +1,7 @@
 import express from 'express';
 import databaseConnection from './data-source/database-connection';
 import globalErrorHandler from './middlewares/global-error-handler.middleware';
+import jwtAuthenticationMiddleware from './middlewares/jwt-authentication.middleware';
 import authorizationRoute from './routes/authorization.route';
 import statusRoute from './routes/status.route';
 import usersRoute from './routes/users.route';
@@ -13,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Cadastrando rotas
 app.use(statusRoute);
-app.use(usersRoute);
+app.use('/users', jwtAuthenticationMiddleware, usersRoute);
 app.use(authorizationRoute);
 
 // Configurando error handler
