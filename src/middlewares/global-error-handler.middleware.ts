@@ -11,6 +11,8 @@ function globalErrorHandler(error: unknown, req: Request, res: Response, next: N
     } else {
         res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
     }
+
+    console.error(error);
 }
 
 export default globalErrorHandler;
