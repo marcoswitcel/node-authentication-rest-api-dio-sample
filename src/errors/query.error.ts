@@ -1,5 +1,6 @@
+import { ApplicationError } from './application.error';
 
-export class QueryError extends Error {
+export class QueryError extends ApplicationError {
 
     contextError?: unknown;
 
