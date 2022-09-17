@@ -14,6 +14,7 @@ Lista de versões usadas, deve funcionar com algumas versões mais e e mais nova
 
 * Pasta `src`: Nesta pasta você encontrará o código fonte da aplicação, escrito com [TypeScript](https://www.typescriptlang.org/).
 * Pasta `dist`: Nesta pasta você encontrará a aplicação que será executada, ela é gerada a partir do código fonte. Para gerá-la execute o comando `npm run build`.
+* Pasta `config`: Nesta pasta você encontrará um arquivo de configuração do projeto.
 
 ## Comando usados para inicializar e configurar o projeto
 
